@@ -3,7 +3,7 @@ import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
 
 import SomeForTest from 'for_develop/SomeForTest';
-import createVsProvider from 'react_store/createStore';
+import createVsProvider from 'react_store/createVsProvider';
 
 import { reducer, VsStoreContextValueState } from 'for_develop/reducer';
 
