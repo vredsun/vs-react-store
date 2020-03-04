@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { getSelectorValue, addSelectorToStack, removeSelectorToStack } from 'react_store/hooks/_state_contorol';
-import { PlayerContextValueState } from 'react_store/PlayerContext';
+import { getSelectorValue, addSelectorToStack, removeSelectorToStack } from 'react_store/_state_contorol';
 
-const useSelector = <V extends any>(selector: (state: PlayerContextValueState) => V) => {
+const useSelector = <V extends any, S extends Record<string, any>>(selector: (state: S) => V) => {
   const [value, setValue] = React.useState<V>(() => getSelectorValue(selector));
 
   React.useEffect(

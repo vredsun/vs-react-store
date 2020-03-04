@@ -1,17 +1,17 @@
-import { _store, PlayerContextValueState } from 'react_store/PlayerContext';
+import { _store } from 'react_store/VsStoreContext';
 
-type Selector<V = any> = (store: PlayerContextValueState) => V;
+type Selector<V extends any, S extends Record<string, any>> = (store: S) => V;
 
 export const setOfSelectors = new Map<any, {
-  selector: Selector;
+  selector: Selector<any, {}>;
   currentValue: any;
   setValuesMap: Map<
     Symbol,
-    (value: ReturnType<Selector>) => any
+    (value: ReturnType<Selector<any, {}>>) => any
   >;
 }>();
 
-export const compareOldValueWithNew = (state: PlayerContextValueState) => {
+export const compareOldValueWithNew = <S extends Record<string, any>>(state: S) => {
   setOfSelectors.forEach((selectorState) => {
     const newValue = selectorState.selector(state);
 
@@ -24,11 +24,11 @@ export const compareOldValueWithNew = (state: PlayerContextValueState) => {
   });
 };
 
-export const getSelectorValue = <V extends any>(selector: Selector<V>) => {
+export const getSelectorValue = <V extends any, S extends Record<string, any>>(selector: Selector<V, S>) => {
   return selector(_store);
 };
 
-export const addSelectorToStack = <V extends any>(key: Symbol, selector: Selector<V>, currentValue: V, setValue: (value: ReturnType<Selector>) => any) => {
+export const addSelectorToStack = <V extends any, S extends Record<string, any>>(key: Symbol, selector: Selector<V, S>, currentValue: V, setValue: (value: ReturnType<Selector<V, S>>) => any) => {
   if (!setOfSelectors.has(selector)) {
     const setValuesMap = new Map();
     setValuesMap.set(key, setValue);
@@ -43,7 +43,7 @@ export const addSelectorToStack = <V extends any>(key: Symbol, selector: Selecto
   }
 };
 
-export const removeSelectorToStack = <V extends any>(key: Symbol, selector: Selector<V>) => {
+export const removeSelectorToStack = <V extends any, S extends Record<string, any>>(key: Symbol, selector: Selector<V, S>) => {
   if (setOfSelectors.has(selector)) {
     setOfSelectors.get(selector).setValuesMap.delete(key);
     if (!setOfSelectors.get(selector).setValuesMap.size) {

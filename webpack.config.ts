@@ -14,14 +14,16 @@ const DIR_APP_DIST = path.join(DIR_ROOT, 'dist');
 
 const pkg = require(path.join(DIR_ROOT, 'package.json'));
 
-const PATH_TO_INDEX_FILE = path.join(DIR_APP_SRC, 'index.tsx');
+const PATH_TO_INDEX_FILE = isDevelopment
+? path.join(DIR_APP_SRC, 'for_develop', 'index.tsx')
+: path.join(DIR_APP_SRC, 'index.ts');
 
 let BUILD = {
   output: {
     path: DIR_APP_DIST,
     publicPath: process.env.PUBLIC_PATH,
   },
-  htmlTemplateName: path.join(DIR_APP_SRC, 'html', 'index.hbs'),
+  htmlTemplateName: path.join(DIR_ROOT, 'webpack', 'templates', 'html', 'index.hbs'),
 };
 
 const getPlugins = () => {
