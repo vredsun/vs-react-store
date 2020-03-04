@@ -1,6 +1,6 @@
 {
   "name": "vs-react-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Стор реакта на хуках",
   "main": "./dist/index.js",
   "repository": {
@@ -76,7 +76,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
