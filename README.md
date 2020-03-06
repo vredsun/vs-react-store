@@ -88,7 +88,7 @@ const selectSomeKey = (state: StoreType) => state.some_number;
 
 const App = React.memo(
   () => {
-    const some_number = useSelector(some_number);
+    const some_number = useSelector(selectSomeKey);
 
     return (
       <span>{some_number}</span>
