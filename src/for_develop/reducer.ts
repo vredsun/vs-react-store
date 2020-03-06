@@ -1,5 +1,5 @@
 import { CHANGE_VOLUME, CHANGE_MULTIPLY, CHANGE_UNION_BLOCKS, changeVolume, changeMultiply, changeUnionBlocks } from 'for_develop/actions';
-import createReducer from 'react_store/createReducer';
+import { createReducer } from 'vs_react_store';
 
 export type VsStoreContextValueState = {
   volume: number;

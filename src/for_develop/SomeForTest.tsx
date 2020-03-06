@@ -1,7 +1,6 @@
 import * as React from 'react';
-import useSelector from 'react_store/useSelector';
+import { useSelector, useDispatch } from 'vs_react_store';
 import { selectVolume } from 'for_develop/selectors';
-import useDispatch from 'react_store/useDispatch';
 import { changeMultiply, changeVolume } from 'for_develop/actions';
 
 type Props = {};

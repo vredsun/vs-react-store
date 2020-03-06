@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { compareOldValueWithNew } from 'react_store/_state_contorol';
+import { compareOldValueWithNew } from './_state_contorol';
 
 type VsStoreContextValueState = Record<string, any>;
 

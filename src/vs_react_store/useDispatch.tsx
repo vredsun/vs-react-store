@@ -1,4 +1,4 @@
-import { _dispatch } from 'react_store/VsStoreContext';
+import { _dispatch } from './VsStoreContext';
 
 const useDispatch = () => {
   return _dispatch;

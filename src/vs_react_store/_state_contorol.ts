@@ -1,4 +1,4 @@
-import { _store } from 'react_store/VsStoreContext';
+import { _store } from './VsStoreContext';
 
 type Selector<V extends any, S extends Record<string, any>> = (store: S) => V;
 

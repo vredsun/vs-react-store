@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { VsStoreProvider, VsStoreProviderProps } from 'react_store/VsStoreContext';
+import { VsStoreProvider, VsStoreProviderProps } from './VsStoreContext';
 
 const createVsProvider = (reducer: VsStoreProviderProps['reducer'], defaultValue: VsStoreProviderProps['defaultValue'], initStore: VsStoreProviderProps['initStore']): React.FC<{}> => {
   return (props) => (
