@@ -13,7 +13,7 @@ npm install --save vs-react-store
 - экшены
 - необязательный коллбэк, вызывающийся при измненении стора
 
-```javascript
+```typescript
 import { createReducer } from 'vs_react_store';
 
 type StoreType = {
@@ -24,7 +24,16 @@ type StoreType = {
 const CHANGE_SOME_NUMBER = 'CHANGE_SOME_NUMBER';
 const CHANGE_SOME_STRING = 'CHANGE_SOME_STRING';
 
+const default_value = {
+  some_number: 1,
+  some_string: 'i wanna be the guy',
+};
+
 const reducer = createReducer<StoreType>(
+  () => {
+    // возвращает дефолтное (начальное) значение стора
+    return default_value;
+  },
   {
     [CHANGE_SOME_NUMBER]: (state, action) => {
       return {
@@ -49,27 +58,12 @@ const reducer = createReducer<StoreType>(
 Стор строится на контексте реакта, который в свою очередь используется хук **React.useReducer**
 По сути **createVsProvider** прокидывает аргументы в параметры хука
 
-Таким образом (на текущий момент) **createVsProvider** имеет 3 **обязательных** параметра ([**React.useReducer**](https://reactjs.org/docs/hooks-reference.html#usereducer))
-1) reducer
-2) default_value
-3) initStore
+Таким образом (на текущий момент) **createVsProvider** имеет 1 **обязательный** параметра ([**React.useReducer (reducer)**](https://reactjs.org/docs/hooks-reference.html#usereducer))
 
 Далее необходимо поместить провайдер в корень вашего приложения
 
-```javascript
-const default_value = {
-  some_number: 1,
-  some_string: 'i wanna be the guy',
-};
-
-const initStore = (default_value_temp) => {
-  return {
-    ...default_value,
-    some_number: 0,
-  };
-};
-
-const VsStoreProvider = createVsProvider(reducer, default_value, initStore);
+```typescript
+const VsStoreProvider = createVsProvider(reducer);
 
 const AppWrap = () => {
   return (
@@ -83,7 +77,7 @@ const AppWrap = () => {
 ### Получение данных их стора (**useSelector**)
 Для получения данных из стора используется хук **useSelector**
 
-```javascript
+```typescript
 const selectSomeKey = (state: StoreType) => state.some_number;
 
 const App = React.memo(
@@ -100,7 +94,7 @@ const App = React.memo(
 ### Изменение данных в сторе (**useDispatch**)
 Для изменения данных из стора используется хук **useDispatch**
 
-```javascript
+```typescript
 const selectSomeKey = (state: StoreType) => state.some_number;
 
 const changeSomeNumber = (number) => ({

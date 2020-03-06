@@ -7,7 +7,22 @@ export type VsStoreContextValueState = {
   unionBlocks: number;
 };
 
+const default_value: VsStoreContextValueState = {
+  volume: 0.5,
+  multiply: 2,
+  unionBlocks: 1,
+};
+
 export const reducer = createReducer<VsStoreContextValueState>(
+  () => {
+    const userData: Partial<VsStoreContextValueState> = JSON.parse(localStorage.getItem('userData')) || {};
+
+    return {
+      volume: userData.volume ?? default_value.volume,
+      multiply: userData.multiply ?? default_value.multiply,
+      unionBlocks: userData.unionBlocks ?? default_value.unionBlocks,
+    };
+  },
   {
     [CHANGE_VOLUME](state, { payload }: ReturnType<typeof changeVolume>) {
       return {

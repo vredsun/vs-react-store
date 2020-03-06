@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { compareOldValueWithNew } from './_state_contorol';
+import { compareOldValueWithNew, initStore } from './_state_contorol';
 
 type VsStoreContextValueState = Record<string, any>;
 
@@ -19,8 +19,6 @@ export let _dispatch: React.Dispatch<any> = () => {
 
 export type VsStoreProviderProps = {
   reducer: React.Reducer<VsStoreContextValueState, any>;
-  defaultValue: VsStoreContextValueState;
-  initStore: (store: VsStoreContextValueState) => VsStoreContextValueState;
 };
 
 const STORE_ELEMENT = 0;
@@ -28,7 +26,7 @@ const DISPATCH_ELEMENT = 1;
 
 export const VsStoreProvider: React.FC<VsStoreProviderProps> = React.memo(
   (props) => {
-    const reducerData = React.useReducer(props.reducer, props.defaultValue, props.initStore);
+    const reducerData = React.useReducer(props.reducer, initStore(props.reducer));
 
     _store = reducerData[STORE_ELEMENT];
     _dispatch = reducerData[DISPATCH_ELEMENT];

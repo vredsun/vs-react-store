@@ -1,4 +1,5 @@
 import { _store } from './VsStoreContext';
+import { isFunction } from 'util';
 
 type Selector<V extends any, S extends Record<string, any>> = (store: S) => V;
 
@@ -50,4 +51,23 @@ export const removeSelectorToStack = <V extends any, S extends Record<string, an
       setOfSelectors.delete(selector);
     }
   }
+};
+
+const default_value_key = Symbol('default_value_key');
+
+export const setDefaultValueToReducer = (reducer: any, default_value) => {
+  reducer[default_value_key] = default_value;
+};
+export const initStore = (reducer: any) => {
+  const newState = reducer[default_value_key];
+
+  Object.keys(newState).forEach(
+    (key) => {
+      if (isFunction(newState[key])) {
+        newState[key] = initStore(newState[key]);
+      }
+    },
+  );
+
+  return newState;
 };
