@@ -19,10 +19,13 @@ const createReducer = <StoreState extends Record<string, any>>(
     let newState = state;
 
     if (handlers.hasOwnProperty(action?.type)) {
-      newState = handlers[action.type](state, action);
+      const tempNewState = handlers[action.type](state, action);
+      if (JSON.stringify(tempNewState) !== JSON.stringify(newState)) {
+        newState = tempNewState;
 
-      if (handleChangeState) {
-        handleChangeState(newState);
+        if (handleChangeState) {
+          handleChangeState(newState);
+        }
       }
     }
 
