@@ -1,4 +1,4 @@
-import { setDefaultValueToReducer } from 'vs_react_store/_state_contorol';
+import { setDefaultValueToReducer } from './_state_contorol';
 
 export type VsAction<P> = {
   type: string;
