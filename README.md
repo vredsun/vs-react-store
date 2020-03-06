@@ -50,8 +50,8 @@ const reducer = createReducer<StoreType>(
 По сути **createVsProvider** прокидывает аргументы в параметры хука
 
 Таким образом (на текущий момент) **createVsProvider** имеет 3 **обязательных** параметра ([**React.useReducer**](https://reactjs.org/docs/hooks-reference.html#usereducer))
-1) reduced
-2) defaulv_value
+1) reducer
+2) default_value
 3) initStore
 
 Далее необходимо поместить провайдер в корень вашего приложения
