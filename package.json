@@ -1,6 +1,6 @@
 {
   "name": "vs-react-store",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Стор реакта на хуках",
   "main": "./lib/index.js",
   "typings": "./dist/vs_react_store/index.d.ts",
